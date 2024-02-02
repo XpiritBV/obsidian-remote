@@ -1,1 +1,7 @@
-sudo /usr/bin/obsidian --no-sandbox --no-xshm --disable-dev-shm-usage --disable-gpu --disable-software-rasterizer
+# testing if we get this output
+if [ -d "/config" ]; then
+    echo "**** /config exists. ****"
+else
+    echo "**** /config does not exist. ****"
+fi
+sudo /usr/bin/obsidian "/config" --no-sandbox --no-xshm --disable-dev-shm-usage --disable-gpu --disable-software-rasterizer
