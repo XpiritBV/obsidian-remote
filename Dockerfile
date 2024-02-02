@@ -31,6 +31,10 @@ ENV CUSTOM_PORT="8080" \
 
 # Add local files
 COPY root/ /
+
+# Add obsidian config to configure known vaults
+# You still need to click once on "all community plugins" and then store the image with 'docker commit <container> obsidian:latest'
+COPY obsidian.json /root/.config/obsidian/
 EXPOSE 8080 8443
 VOLUME ["/config","/vaults"]
 

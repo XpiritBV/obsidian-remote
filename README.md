@@ -1,3 +1,18 @@
+Fork from https://github.com/XpiritBV/obsidian-remote.git to add a preconfigured vault path to it and have a way to get the vault auto started as much as possible.
+
+The changes in this repo make:
+- the container start mount the vault in the /config folder (mounted)
+
+To be able to use it for automation (we run "Export to HTML" using Selenium for example), there is still one manual action after building the Dockerfile:
+- Run the image once
+- Connect to the VNC setup with a browser to https://localhost:8080 (see the file `run-docker-process.ps1`)
+- Click on "Trust community plugins", this will execute the community plugins, for us we need this for the DataView plugin
+- Now store the image changes in the container by:
+  - Exiting the interactive session (CTRL + P + Q), LEAVE THE CONTAINER RUNNING
+  - Commit the changes to the image: `docker commit <container-id> vaultSnapShot`
+- Now you can push the container as is (with the trust config, we can't find where that is stored) into a Container Registry you choose.
+- Next time you run this container with the normal mounts, the Obsidian vault will be opened by default.
+
 # obsidian-remote
 
 This docker image allows you to run [obsidian](https://obsidian.md/) in docker as a container and access it via your web browser.
@@ -278,6 +293,3 @@ docker run --rm -it `
 Click on the circle to the left side of your browser window. In there you will find a textbox for updating the remote clipboard or copying from it.
 
 ![image](https://user-images.githubusercontent.com/1399443/202805847-a87e2c7c-a5c6-4dea-bbae-4b25b4b5866a.png)
-
-
-
